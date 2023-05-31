@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Guessing game</title>
+</head>
+<body>
+    <h1><u>Guess a Number</u></h1>
+    <input type="number" id="userGuess">
+    <br>
+    <button onclick="checkGuess()">Check</button>
+    <p id="guesses"></p>
+
+    <script>
+        // Generate a random number between 1 and 50 and assign it to the variable "randomNumber"
+        var randomNumber = Math.floor(Math.random() * 50) + 1;
+        // Initialize the number of remaining guesses to 5
+        var guessesLeft = 5;
+        // Initialize an empty array to store the user's guesses
+        var guesses = [];
+        
+
+        // Function to check the user's guess
+        function checkGuess() {
+            // Get the user's guess from the input field and convert it to an integer
+            var userGuess = parseInt(document.getElementById("userGuess").value);
+
+            // Compare the user's guess with the random number
+            if (userGuess === randomNumber) {
+                alert("Congratulations! You guessed the correct number!");
+            } else if (userGuess < randomNumber) {
+                alert("Too low! Try again.");
+            } else {
+                alert("Too high! Try again.");
+            }
+        // Decrement the number of remaining guesses
+        guessesLeft--;
+        // Add the user's guess to the "guesses" array
+        guesses.push(userGuess);
+          //check if the gueesses = 0
+          if (guessesLeft === 0) {
+            // Display an alert with the correct random number
+            alert("Game over. The secret number was: " + randomNumber);
+            document.querySelector("button").disabled = true;
+          } else {
+            document.getElementById("guesses").innerHTML = "Guesses: " + guesses.join(", ");
+            alert("You have " + guessesLeft + " guesses left.");
+          }
+          document.getElementById("userGuess").value = "";
+        }
+    </script>
+</body>
+</html>
